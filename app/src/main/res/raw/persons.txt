@@ -1,0 +1,5 @@
+Name    FName   Tel Gender
+Avi,Peretz,050-123-4567,Male
+Moshe,Peretz,052-234-5678,Male
+Kochava,Peretz,053-456-7890,Female
+Dana,International,054-765-4321,Transgender
