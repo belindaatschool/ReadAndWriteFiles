@@ -100,10 +100,11 @@ public class FileReadWrite {
                  BufferedWriter writer = new BufferedWriter(osw)                                 )
             {
                 writeHeader(writer); // writeFile 1st line
-                for (Person p : personArrList)
+                //for (Person p : personArrList)
+                for (int i = 0; i < personArrList.size(); i++)
                 {
-                    FileReadWrite.write2File(p, writer); // writeFile current person to the file
-                    Log.d("Write2file", "Written: " + p.toString());
+                    write2File(personArrList.get(i), writer); // writeFile current person to the file
+                    Log.d("Write2file", "Written: " + personArrList.get(i).toString());
                 }
             }
             catch (Exception e) {
@@ -155,7 +156,7 @@ public class FileReadWrite {
     /**
      * Utility to verify external storage state
      */
-    public static boolean checkExternalStorageState() {
+    private static boolean checkExternalStorageState() {
         // Verify that the external storage is available for writing
         String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state))

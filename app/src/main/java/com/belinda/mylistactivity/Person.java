@@ -2,6 +2,7 @@ package com.belinda.mylistactivity;
 
 public class Person
 {
+    // attributes
     String firstName, lastName, phone;
     Gender gender;
 

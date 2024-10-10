@@ -106,33 +106,16 @@ public class JsonReadWrite<T>
         return arrList;
     }
 
-
-    // Utility to verify external storage state
-    // results for this method are stored in
-    // mExternalStorageAvailable, mExternalStorageWritable
-
     /**
      * Utility to verify external storage state
-     * results for this method are stored in mExternalStorageAvailable, mExternalStorageWritable
-     *
-     * @return true if external storage is available and writeable, false otherwise
      */
-    public boolean checkExternalStorageState() {
+    private static boolean checkExternalStorageState() {
         // Verify that the external storage is available for writing
         String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state))
         { // We can readFile and writeFile the media
-            mExternalStorageAvailable = true;
-            mExternalStorageWriteable = true;
-        } else
-        if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state))
-        {    // We can only readFile the media
-            mExternalStorageAvailable = true;
-            mExternalStorageWriteable = false;
-        } else { // Something else is wrong. we can neither readFile nor writeFile
-            mExternalStorageAvailable = false;
-            mExternalStorageWriteable = false;
+            return true;
         }
-        return (mExternalStorageAvailable && mExternalStorageWriteable);
+        return false;
     }
 }
