@@ -28,17 +28,19 @@ import java.util.Collection;
  */
 public class JsonReadWrite<T>
 {
-    static  boolean mExternalStorageAvailable = false;
-    static  boolean mExternalStorageWriteable = false;
+    public static final String fileName = "artists.json";
+    private Context context;
+
+    public JsonReadWrite(Context context) {
+        this.context = context;
+    }
 
     /**
      * Writes an ArrayList to a file as JSON
      * @param arrayList
-     * @param fileName
-     * @param context
      * @return true if successful, false otherwise
      */
-    boolean writeJsonArrayList(ArrayList<T> arrayList, String fileName, Context context) {
+    boolean writeJsonArrayList(ArrayList<T> arrayList) {
         if (! checkExternalStorageState()) {
             Log.e("WriteJsonArrayList", "Cannot writeFile - External storage not available or not Writeable");
             return false;
@@ -65,14 +67,11 @@ public class JsonReadWrite<T>
 
     /**
      * Reads an ArrayList from a file as JSON
-     * @param fileName
-     * @param context
      * @param type Class type to read. For example of type is Person.class
      * @return the ArrayList if successful, null otherwise
      */
-    public ArrayList<T> readJsonArrayList(String fileName, Context context, Class<T> type) {
-        checkExternalStorageState();
-        if (! mExternalStorageAvailable) {
+    public ArrayList<T> readJsonArrayList(Class<T> type) {
+        if (! checkExternalStorageState()) {
             Log.e("ReadJsonArrayList", "Cannot readFile - External storage not available");
             return null;
         }

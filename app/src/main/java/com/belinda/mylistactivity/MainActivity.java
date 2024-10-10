@@ -23,6 +23,8 @@ public class MainActivity extends Activity {
     MyViewAdapter adapter;
     ArrayList<Person> artists;
 
+    JsonReadWrite jsonReadWrite;
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -31,6 +33,7 @@ public class MainActivity extends Activity {
         initViews();
 
         artists = new ArrayList<Person>();
+        jsonReadWrite = new JsonReadWrite<Person>(this);
 
         // setup RecyclerView
         adapter = new MyViewAdapter(this, artists);
@@ -69,14 +72,12 @@ public class MainActivity extends Activity {
     }
 
     public void writeJson(View v) {
-        JsonReadWrite jsonReadWrite = new JsonReadWrite<Person>();
-        if (!jsonReadWrite.writeJsonArrayList(artists, "artists.json", this))
+        if (!jsonReadWrite.writeJsonArrayList(artists))
             Toast.makeText(this, "Failed Writing JSON", Toast.LENGTH_LONG).show();
     }
 
     public void readJson(View v) {
-        JsonReadWrite jsonReadWrite = new JsonReadWrite<Person>();
-        ArrayList<Person> artists2 = jsonReadWrite.readJsonArrayList("artists.json", this, Person.class);
+        ArrayList<Person> artists2 = jsonReadWrite.readJsonArrayList(Person.class);
         if (artists2 != null) {
             artists.clear();
             artists.addAll(artists2);
